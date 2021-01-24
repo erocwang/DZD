@@ -1,6 +1,21 @@
+# code for connection, database/table/entry creation, and fetching 
 import sqlite3 
 from sqlite3 import Error 
 
+# returns a map of kmers to their 21-mer counts
+def read_fastq(source_file): 
+    kmers = {}
+    with open(source_file,'r') as f:
+        lines = f.readlines()[1::4]
+        for line in lines:         
+                line = line.strip()
+                if(len(line) >= 21):
+                    kmers[line] = len(line) - 20 
+                else: 
+                    kmers[line] = 0
+    return kmers
+
+# returns a connection to the specified database if valid
 def create_connection(db_file): 
     conn = None
     try: 
@@ -9,6 +24,7 @@ def create_connection(db_file):
         print(e)
     return conn
 
+# creates a kmer table with given connection path
 def create_kmer_table(conn):
     try: 
         cur = conn.cursor() 
@@ -21,6 +37,7 @@ def create_kmer_table(conn):
     except Error as e:
         print(e)
 
+# inserts a new entry into the kmer table if valid 
 def create_kmer(conn, kmer): 
     try:
         sql = """ INSERT INTO kmer(kmer,count)
@@ -32,6 +49,7 @@ def create_kmer(conn, kmer):
         print(e)
     return cur.lastrowid
 
+# returns all kmers in the kmer table from specified connection
 def select_all_seqs(conn):
     cur = conn.cursor()
     rows = [row[0] for row in cur.execute("SELECT kmer FROM kmer")]
