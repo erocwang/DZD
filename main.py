@@ -11,11 +11,11 @@ def main():
         for kmer in kmers:
             new_entry = (kmer, kmers[kmer])
             database.create_kmer(conn, new_entry)
+        cur = conn.cursor()
+        print(cur.lastrowid)
         conn.close()
     else: 
         print("Error! Cannot create database connection")
-
-    
 
     kmer = 'ACGT'
     seq = 'ACACACGT'

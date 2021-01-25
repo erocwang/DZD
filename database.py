@@ -9,10 +9,12 @@ def read_fastq(source_file):
         lines = f.readlines()[1::4]
         for line in lines:         
                 line = line.strip()
-                if(len(line) >= 21):
-                    kmers[line] = len(line) - 20 
-                else: 
-                    kmers[line] = 0
+                count = 0
+                for i in range(21,len(line)+1):
+                    if line[i-21:i] in kmers: 
+                        kmers[line[i-21:i]] += 1
+                    else:
+                        kmers[line[i-21:i]] = 1
     return kmers
 
 # returns a connection to the specified database if valid
