@@ -29,13 +29,13 @@ We define the size of the kmer as n and the size of the larger sequence as m.
 @pre_computed_match 
 We precompute all possible kmers that are off by at most 2 characters.  
 The number of kmers that are off by 1 character is n * 3. We see that there are n positions and 3 new options for each one.  
-The number of kmers that are off by 2 characters is n choose 2 * 3 * 3. Here we choose 2 positions out of n, and have new options for each position.  
+The number of kmers that are off by 2 characters is n choose 2 * 3 * 3. Here we choose 2 positions out of n, and have 3 new options for each position.  
 In terms, the number of kmers that are off by 2 characters is (n!)/(2!(n-2)!) * 3 * 3 = (n * (n-1) / 2) * 9.  
 We also must add the original kmer for complexity of 1.  
-The combined time for precomputation is (n*3) + (n * (n-1) / 2 * 9) + (1) = (3n) + (4.5n^2 - 4.5n) + (1) -> O(n^2) 
-Going through all substrings of the sequence is (m-n +1)(1) -> O(m). The cost to check is 1, because we have constant time lookup from our precomputation. 
-The overall time complexity is O(m + n^2) -> O(m) if m > n^2 -> O(n^2) if n^2 > m 
-The memory complexity is the same as the time complexity for precomputation -> O(n^2) 
+The combined time for precomputation is (n*3) + (n * (n-1) / 2 * 9) + (1) = (3n) + (4.5n^2 - 4.5n) + (1) -> O(n^2)  
+Going through all substrings of the sequence is (m-n +1)(1) -> O(m). The cost to check is 1, because we have constant time lookup from our precomputation.  
+The overall time complexity is O(m + n^2) -> O(m) if m > n^2 -> O(n^2) if n^2 > m  
+The memory complexity is the same as the time complexity for precomputation -> O(n^2)  
 
 @sliding_window_match  
 We go through all substrings of the sequence and check each character one by one.  
