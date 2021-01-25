@@ -26,7 +26,7 @@ I've included 2 functions for the matching, one of which sacrifices memory for f
 
 We define the size of the kmer as n and the size of the larger sequence as m.  
 
-@pre_computed_match 
+@pre_computed_match  
 We precompute all possible kmers that are off by at most 2 characters.  
 The number of kmers that are off by 1 character is n * 3. We see that there are n positions and 3 new options for each one.  
 The number of kmers that are off by 2 characters is n choose 2 * 3 * 3. Here we choose 2 positions out of n, and have 3 new options for each position.  
