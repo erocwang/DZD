@@ -52,9 +52,3 @@ The memory complexity is better for the normal solution for most cases except ed
 ### Side Notes
 
 database.py contains code that wipes the current table and creates a new one.  
-
-### Assumptions
-
-'A','C','G','T' are the only values in DNA sequences.  
-fastq files are always formatted in the same way for this program's purposes.  
-Duplicates are not desired during extraction, and not put in table twice.  
